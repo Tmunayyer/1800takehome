@@ -1,15 +1,14 @@
-const express = require('express')
-
-const routes = require('./routes')
+const createServer = require('./server')
 const db = require('./db/db')
 
-const app = express()
-
-// "initialize" the database
+// init the "database"
 db.initialize()
 
-routes.forEach(({ url, method, handler }) => {
-  if (method === 'GET') app.get(url, handler)
-})
+// inject dependencies
+const dependencies = {
+  db,
+}
+
+const app = createServer(dependencies)
 
 app.listen(3001, () => console.log('listening on 3001...'))
