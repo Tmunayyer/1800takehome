@@ -1,12 +1,5 @@
 const fs = require('fs')
 
-// const entry = {
-//   // userId: number
-//   // id: number
-//   // title: string
-//   // body: string
-// }
-
 const db = {
   entries: [], // entry[]
   mapOfTitles: {
@@ -44,8 +37,8 @@ db.getEntries = function () {
  * @return {Entry}
  */
 db.getEntryByTitle = function (title) {
-  const lookups = this.mapOftitles[title]
-  if (lookups === undefined || lookups.length === 0) return -1
+  const lookups = this.mapOfTitles[title]
+  if (lookups === undefined || lookups.length === 0) return []
 
   return lookups.map((index) => {
     return this.entries[index]
