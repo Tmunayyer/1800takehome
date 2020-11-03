@@ -4,6 +4,7 @@ import sagaFactory from '../saga/sagaFactory'
 
 const initialState = {
   entries: { data: [], status: 'loading' },
+  search: '',
 }
 
 const entrySlice = createSlice({
@@ -13,10 +14,13 @@ const entrySlice = createSlice({
     setEntries(state, action) {
       state.entries = { data: action.payload, status: 'loaded' }
     },
+    setSearch(state, action) {
+      state.search = action.payload
+    },
   },
 })
 
-export const { setEntries } = entrySlice.actions
+export const { setEntries, setSearch } = entrySlice.actions
 export default entrySlice.reducer
 
 export const [entrySagas, entrySagaCreators] = sagaFactory({

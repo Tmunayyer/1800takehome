@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { entrySagaCreators } from './store/entry/entry'
+import { entrySagaCreators, setSearch } from './store/entry/entry'
 
 import { Screen, Entry, Input } from './components'
 
@@ -22,7 +22,18 @@ function EntryList() {
 }
 
 function SearchBar() {
-  return <Input icon={'search'} />
+  const entryStore = useSelector((state) => state.entryStore)
+  const dispatch = useDispatch()
+
+  return (
+    <Input
+      icon={'search'}
+      value={entryStore.search}
+      onChangeHandler={(e) => {
+        dispatch(setSearch(e.target.value))
+      }}
+    />
+  )
 }
 
 function App() {
