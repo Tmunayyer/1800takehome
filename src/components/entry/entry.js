@@ -17,11 +17,14 @@ export function Entry(props) {
 }
 
 Entry.propTypes = {
+  // entry from the server
   data: PropTypes.shape({
     id: PropTypes.number,
     userId: PropTypes.number,
     title: PropTypes.string,
     body: PropTypes.string,
   }),
+
+  // index in the array
   index: PropTypes.number.isRequired,
 }
