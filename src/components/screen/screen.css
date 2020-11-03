@@ -1,6 +1,15 @@
 .screen {
-  background-color: #f0ead6;
+  background-color: #bababa82;
 
   width: 100vw;
   height: 100vh;
+}
+
+.container {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 }

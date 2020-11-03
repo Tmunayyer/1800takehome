@@ -1,26 +1,32 @@
 import React, { useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, loadEntries, counterSagaCreators } from './store/counter'
-// import { useEffect } from 'react'
+import { entrySagaCreators } from './store/entry/entry'
 
-import { Screen } from './components'
+import { Screen, Entry } from './components'
 
-function App() {
-  const counter = useSelector((state) => state.counter)
+function EntryList() {
+  const entryStore = useSelector((state) => state.entryStore)
   const dispatch = useDispatch()
 
-  const count = () => {
-    const action = counterSagaCreators.incrementAfterSaga(2000)
-
+  useEffect(() => {
+    const action = entrySagaCreators.fetchEntries()
     dispatch(action)
-  }
+  }, [dispatch])
 
-  // useEffect(() => {
-  //   dispatch(loadEntries())
-  // }, [])
+  if (entryStore.entries.status !== 'loaded') return null
 
-  return <Screen test123={'hello world'} />
+  return entryStore.entries.data.map((data, index) => (
+    <Entry key={data.id} data={data} index={index} />
+  ))
+}
+
+function App() {
+  return (
+    <Screen>
+      <EntryList />
+    </Screen>
+  )
 }
 
 export default App

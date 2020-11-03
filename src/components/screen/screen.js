@@ -7,7 +7,7 @@ export function Screen(props) {
 
   return (
     <div className={'screen'} style={style}>
-      {children}
+      <div className={'container'}>{children}</div>
     </div>
   )
 }
