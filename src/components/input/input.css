@@ -1,0 +1,25 @@
+.input-container {
+  display: flex;
+  flex-direction: row;
+  /* flex: 1; */
+  align-items: center;
+  padding: 0px 5px;
+  margin-bottom: 10px;
+
+  background-color: white;
+  width: 45vw;
+  height: 2em;
+
+  border-radius: 5px;
+}
+
+.input {
+  border: none;
+  margin-left: 4px;
+  width: 100%;
+  padding: none;
+}
+
+.input:focus {
+  outline: none;
+}

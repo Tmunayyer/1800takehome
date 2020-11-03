@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { entrySagaCreators } from './store/entry/entry'
 
-import { Screen, Entry } from './components'
+import { Screen, Entry, Input } from './components'
 
 function EntryList() {
   const entryStore = useSelector((state) => state.entryStore)
@@ -21,9 +21,14 @@ function EntryList() {
   ))
 }
 
+function SearchBar() {
+  return <Input icon={'search'} />
+}
+
 function App() {
   return (
     <Screen>
+      <SearchBar />
       <EntryList />
     </Screen>
   )

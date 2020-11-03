@@ -17,5 +17,5 @@ Screen.propTypes = {
   style: PropTypes.object,
 
   // contents of the screen
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element.isRequired),
 }
