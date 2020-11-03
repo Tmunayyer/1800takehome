@@ -4,8 +4,9 @@ module.exports = [
     method: 'GET',
     handler: (db) =>
       function (req, res) {
-        const data = db.getEntries()
-        res.send({ kind: 'ok', entries: data })
+        const entries = db.getEntries()
+        res.status(200)
+        res.send(entries)
       },
   },
   {
@@ -18,15 +19,15 @@ module.exports = [
         if (!title) {
           res.status(400)
           res.send({
-            kind: 'user-error',
             info: 'missing query parameter: title',
           })
           return
         }
 
-        const data = db.getEntryByTitle(title)
+        const entries = db.getEntryByTitle(title)
 
-        res.send({ kind: 'ok', entries: data })
+        res.status(200)
+        res.send(entries)
       },
   },
 ]

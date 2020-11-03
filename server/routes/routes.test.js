@@ -31,8 +31,7 @@ describe('route: /v1/all', () => {
     const data = response.body
 
     // make sure this send some data back
-    expect(data.kind).toBe('ok')
-    expect(data.entries.length).toBeGreaterThan(0)
+    expect(data.length).toBeGreaterThan(0)
   })
 })
 
@@ -51,18 +50,16 @@ describe('route /v1/search', () => {
     let data = response.body
 
     // make sure this sends data corresponding to url parameters
-    expect(data.kind).toBe('ok')
-    expect(data.entries.length).toBeGreaterThan(0)
-    expect(data.entries[0].title).toBe('validEntry')
+    expect(data.length).toBeGreaterThan(0)
+    expect(data[0].title).toBe('validEntry')
 
     urlParameters = '?title=invalidTitle'
     response = await mockApp.get(url + urlParameters)
     data = response.body
 
     // make sure we get empty array on invalid search
-    expect(data.kind).toBe('ok')
-    expect(Array.isArray(data.entries)).toBe(true)
-    expect(data.entries.length).toBe(0)
+    expect(Array.isArray(data)).toBe(true)
+    expect(data.length).toBe(0)
   })
 
   test(`GET: missing query`, async () => {
@@ -72,7 +69,6 @@ describe('route /v1/search', () => {
     let data = response.body
 
     expect(response.status).toBe(400)
-    expect(data.kind).toBe('user-error')
     expect(data.info).toBeTruthy()
   })
 })
