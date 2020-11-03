@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 
 const routes = require('./routes/routes')
 
@@ -12,6 +13,14 @@ const routes = require('./routes/routes')
 function createServer(dependencies) {
   const { db } = dependencies
   const app = express()
+
+  // apply middleware
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    }),
+  )
 
   routes.forEach(({ url, method, handler }) => {
     // dependency inject on handlers
