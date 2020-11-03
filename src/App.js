@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { increment, loadEntries, counterSagaCreators } from './store/counter'
 // import { useEffect } from 'react'
+
+import { Screen } from './components'
 
 function App() {
   const counter = useSelector((state) => state.counter)
@@ -20,27 +20,7 @@ function App() {
   //   dispatch(loadEntries())
   // }, [])
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <div onClick={count}>
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>The count {counter.value}</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  )
+  return <Screen test123={'hello world'} />
 }
 
 export default App
