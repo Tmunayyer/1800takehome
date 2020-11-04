@@ -83,9 +83,10 @@ export const [entrySagas, entrySagaCreators] = sagaFactory({
 
       if (term === '') return yield put(setSearchResults({ results: [], term }))
 
-      const searchResults = rawData.filter((entry) => {
-        return entry.title.includes(term)
-      })
+      const searchResults = rawData.reduce((acc, elem, index) => {
+        if (elem.title.includes(term)) acc.push(index)
+        return acc
+      }, [])
 
       yield put(setSearchResults({ results: searchResults, term }))
     })

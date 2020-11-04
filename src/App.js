@@ -27,7 +27,9 @@ function EntryList() {
   const searchHasNoResults = searchResults.term !== ''
 
   if (hasSearchResults || searchHasNoResults) {
-    data = searchResults.data
+    data = searchResults.data.map((rawDataIndex) => {
+      return entries.data[rawDataIndex]
+    })
   }
 
   return data.map((elem, index, arr) => {
