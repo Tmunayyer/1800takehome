@@ -16,7 +16,15 @@ function EntryList() {
 
   if (entryStore.entries.status !== 'loaded') return null
 
-  return entryStore.entries.data.map((data, index) => (
+  let data = entryStore.entries.data
+
+  const hasSearchResults = entryStore.searchResults.data.length
+
+  if (hasSearchResults) {
+    data = entryStore.searchResults.data
+  }
+
+  return data.map((data, index) => (
     <Entry key={data.id} data={data} index={index} />
   ))
 }
@@ -30,7 +38,9 @@ function SearchBar() {
       icon={'search'}
       value={entryStore.search}
       onChangeHandler={(e) => {
-        dispatch(setSearch(e.target.value))
+        const term = e.target.value
+        dispatch(entrySagaCreators.searchEntries(term))
+        dispatch(setSearch(term))
       }}
     />
   )

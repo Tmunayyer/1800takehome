@@ -9,13 +9,22 @@ import { entrySagas } from '../entry/entry'
  */
 const sagas = [...entrySagas]
 
-export default function* rootSaga() {
-  // set up environemtn
-  const api = new API('http://localhost:3001')
+export default function rootSaga(store) {
+  return function* () {
+    // set up environemtn
+    const api = new API('http://localhost:3001')
 
-  const environment = {
-    api,
+    const environment = {
+      api,
+      /**
+       * The rootSaga will spin up AFTER the store has been created.
+       * Because of this it would be nice to have a reference to make sure
+       * were using the correct state.
+       *
+       */
+      store,
+    }
+
+    yield all(sagas.map((s) => s(environment)))
   }
-
-  yield all(sagas.map((s) => s(environment)))
 }

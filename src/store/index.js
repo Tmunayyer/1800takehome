@@ -12,6 +12,7 @@ const reducer = combineReducers({
 
 const store = createStore(reducer, applyMiddleware(sagaMiddleware))
 
-sagaMiddleware.run(sagas)
+const rootSaga = sagas(store)
+sagaMiddleware.run(rootSaga)
 
 export default store
