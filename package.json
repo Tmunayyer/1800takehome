@@ -77,9 +77,9 @@
   "scripts": {
     "dev-server": "nodemon ./server/index.js",
     "start-server": "node ./server/index.js",
-    "start": "node scripts/start.js",
+    "start": "npm run start-server & node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --detectOpenHandles"
+    "test": "node scripts/test.js  --detectOpenHandles"
   },
   "eslintConfig": {
     "extends": [
@@ -125,7 +125,7 @@
       "<rootDir>/server/**/*.{spec,test}.{js,jsx,ts,tsx}"
     ],
     "testEnvironment": "jsdom",
-    "testRunner": "/Users/thomas/Desktop/1800flowers/node_modules/jest-circus/runner.js",
+    "testRunner": "/Users/thomas/Desktop/1800takehome/node_modules/jest-circus/runner.js",
     "transform": {
       "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",

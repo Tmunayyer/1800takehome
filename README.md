@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Getting Start
+## Getting Started
 
 1. Clone the repository:
 
@@ -26,13 +26,7 @@ cd 1800takehome
 npm install
 ```
 
-4. Start the server:
-
-```
-npm run start-server
-```
-
-5. Bundle the frontend:
+4. Start the application:
 
 ```
 npm start
@@ -40,32 +34,12 @@ npm start
 
 ## Testing
 
-1. Clone the repository:
-
-```
-git clone https://github.com/Tmunayyer/1800takehome.git
-
-or
-
-git clone git@github.com:Tmunayyer/1800takehome.git
-```
-
-2. Enter the directory:
-
-```
-cd 1800takehome
-```
-
-3. Install the dependencies:
-
-```
-npm install
-```
+Starting from "Getting Started" #3:
 
 4. Install the developer dependencies:
 
 ```
-npm install --dev
+npm install --only=dev
 ```
 
 5. Run the tests:
