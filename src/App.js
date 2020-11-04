@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { entrySagaCreators, setSearch } from './store/entry/entry'
+import { entrySagaCreators, setSearch, setEditEntry } from './store/entry/entry'
 
-import { Screen, Entry, Input } from './components'
+import { Screen, Entry, Input, Popup } from './components'
 
 function EntryList() {
   const entryStore = useSelector((state) => state.entryStore)
@@ -46,9 +46,27 @@ function SearchBar() {
   )
 }
 
+function EditEntryForm() {
+  const entryStore = useSelector((state) => state.entryStore)
+  const dispatch = useDispatch()
+
+  let show = false
+  if (entryStore.editEntry) show = true
+
+  return (
+    <Popup
+      show={show}
+      onClickOutside={() => {
+        dispatch(setEditEntry(null))
+      }}
+    />
+  )
+}
+
 function App() {
   return (
     <Screen>
+      <EditEntryForm />
       <SearchBar />
       <EntryList />
     </Screen>

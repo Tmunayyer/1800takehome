@@ -6,6 +6,7 @@ const initialState = {
   entries: { data: [], status: 'loading' },
   search: '',
   searchResults: { data: [], status: 'searching' },
+  editEntry: null,
 }
 
 const entrySlice = createSlice({
@@ -22,10 +23,21 @@ const entrySlice = createSlice({
     setSearchResults(state, action) {
       state.searchResults = { data: action.payload, status: 'serached' }
     },
+    setEditEntry(state, action) {
+      const [entry] = state.entries.data.filter(({ id }) => {
+        return id === action.payload
+      })
+      state.editEntry = entry
+    },
   },
 })
 
-export const { setEntries, setSearch, setSearchResults } = entrySlice.actions
+export const {
+  setEntries,
+  setSearch,
+  setSearchResults,
+  setEditEntry,
+} = entrySlice.actions
 export default entrySlice.reducer
 
 export const [entrySagas, entrySagaCreators] = sagaFactory({

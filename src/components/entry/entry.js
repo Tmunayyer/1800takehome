@@ -2,11 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './entry.css'
 
+import { useDispatch } from 'react-redux'
+import { setEditEntry } from '../../store/entry/entry'
+
 export function Entry(props) {
-  const { userId, title, body } = props.data
+  const { id, userId, title, body } = props.data
+
+  const dispatch = useDispatch()
 
   return (
-    <div className={'entry-card'}>
+    <div
+      className={'entry-card'}
+      onClick={() => {
+        dispatch(setEditEntry(id))
+      }}
+    >
       <div className={'card-content'}>
         <div className={'user'}>{userId}</div>
         <div className={'title'}>{title}</div>
