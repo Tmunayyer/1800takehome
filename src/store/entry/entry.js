@@ -75,6 +75,7 @@ export const [entrySagas, entrySagaCreators] = sagaFactory({
   },
 
   searchEntries: function* searchEntries({ store }) {
+    // milliseconds
     yield debounce(500, 'searchEntries', function* (action) {
       const { entryStore } = store.getState()
 
