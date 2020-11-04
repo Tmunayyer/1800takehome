@@ -20,7 +20,10 @@ export function PopupBody(props) {
 }
 
 PopupBody.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 }
 
 export function PopupActions(props) {
@@ -29,7 +32,10 @@ export function PopupActions(props) {
 }
 
 PopupActions.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 }
 
 export function Popup(props) {
@@ -56,5 +62,8 @@ Popup.propTypes = {
   onClickOutside: PropTypes.func.isRequired,
   onClickInside: PropTypes.func,
 
-  children: PropTypes.arrayOf(PropTypes.element.isRequired),
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]),
 }
