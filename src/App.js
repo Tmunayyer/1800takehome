@@ -25,7 +25,14 @@ function EntryList() {
   }
 
   return data.map((data, index) => (
-    <Entry key={data.id} data={data} index={index} />
+    <Entry
+      key={data.id}
+      data={data}
+      index={index}
+      onClick={() => {
+        dispatch(setEditEntry(data.id))
+      }}
+    />
   ))
 }
 
@@ -59,7 +66,9 @@ function EditEntryForm() {
       onClickOutside={() => {
         dispatch(setEditEntry(null))
       }}
-    />
+    >
+      <Input></Input>
+    </Popup>
   )
 }
 

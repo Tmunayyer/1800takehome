@@ -2,21 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './entry.css'
 
-import { useDispatch } from 'react-redux'
-import { setEditEntry } from '../../store/entry/entry'
-
 export function Entry(props) {
-  const { id, userId, title, body } = props.data
-
-  const dispatch = useDispatch()
+  const { userId, title, body } = props.data
+  const { onClick } = props
 
   return (
-    <div
-      className={'entry-card'}
-      onClick={() => {
-        dispatch(setEditEntry(id))
-      }}
-    >
+    <div className={'entry-card'} onClick={onClick}>
       <div className={'card-content'}>
         <div className={'user'}>{userId}</div>
         <div className={'title'}>{title}</div>
@@ -37,4 +28,5 @@ Entry.propTypes = {
 
   // index in the array
   index: PropTypes.number.isRequired,
+  onClick: PropTypes.func,
 }
