@@ -19,10 +19,15 @@ function EntryList() {
 
   const entries = useSelector((state) => state.entryStore.entries)
   const searchResults = useSelector((state) => state.entryStore.searchResults)
+  const search = useSelector((state) => state.entryStore.search)
   if (entries.status !== 'loaded') return null
 
   let data = entries.data
-  if (searchResults.data.length) {
+
+  const hasSearchResults = searchResults.data.length
+  const searchHasNoResults = searchResults.status === 'loaded' && search !== ''
+
+  if (hasSearchResults || searchHasNoResults) {
     data = searchResults.data
   }
 
