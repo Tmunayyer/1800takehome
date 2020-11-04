@@ -3,10 +3,11 @@ import './button.css'
 import PropTypes from 'prop-types'
 
 export function Button(props) {
-  const { text, onClick, disabled } = props
+  const { type, text, onClick, disabled } = props
 
   return (
     <button
+      className={type}
       onClick={() => {
         if (disabled) return
         onClick()
@@ -21,5 +22,5 @@ Button.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
-  color: PropTypes.string,
+  type: PropTypes.string,
 }

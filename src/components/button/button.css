@@ -1,0 +1,38 @@
+.submit {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 0.8em 1.5em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 5px;
+}
+
+.submit:hover {
+  cursor: pointer;
+}
+
+.submit:focus {
+  outline: 0;
+}
+
+.cancel {
+  background-color: transparent;
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: underline;
+  display: inline-block;
+  font-size: 12px;
+  height: fit-content;
+}
+
+.cancel:hover {
+  cursor: pointer;
+}
+
+.cancel:focus {
+  outline: 0;
+}
