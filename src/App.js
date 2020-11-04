@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Screen, Entry, Input, Popup, Button } from './components'
+import { Screen, Entry, Input, TextArea, Button } from './components'
+
+import { Popup, PopupHeader, PopupBody, PopupActions } from './components'
 
 import {
   entrySagaCreators,
@@ -85,34 +87,43 @@ function EditEntryForm() {
         dispatch(setEditEntry(null))
       }}
     >
-      <Input
-        value={title}
-        onChangeHandler={(e) => {
-          dispatch(editEntryField({ name: 'title', value: e.target.value }))
-        }}
-      />
-      <Input
-        value={body}
-        onChangeHandler={(e) => {
-          dispatch(editEntryField({ name: 'body', value: e.target.value }))
-        }}
-      />
+      <PopupHeader text={'Edit Entry'} />
 
-      <Button
-        text={'save'}
-        onClick={() => {
-          dispatch(saveEditEntry())
-          dispatch(setEditEntry(null))
-        }}
-        disabled={false}
-        type={'greene'}
-      />
-      <Button
-        text={'cancel'}
-        onClick={() => dispatch(setEditEntry(null))}
-        disabled={false}
-        type={'red'}
-      />
+      <PopupBody>
+        <TextArea
+          label={'Title:'}
+          value={title}
+          onChangeHandler={(e) => {
+            dispatch(editEntryField({ name: 'title', value: e.target.value }))
+          }}
+        />
+        <TextArea
+          label={'Body:'}
+          value={body}
+          onChangeHandler={(e) => {
+            dispatch(editEntryField({ name: 'body', value: e.target.value }))
+          }}
+        />
+      </PopupBody>
+
+      <PopupActions>
+        <Button
+          text={'cancel'}
+          onClick={() => dispatch(setEditEntry(null))}
+          disabled={false}
+          type={'cancel'}
+        />
+        <Button
+          text={'save'}
+          onClick={() => {
+            dispatch(saveEditEntry())
+            dispatch(setEditEntry(null))
+            dispatch(entrySagaCreators.searchEntries())
+          }}
+          disabled={false}
+          type={'submit'}
+        />
+      </PopupActions>
     </Popup>
   )
 }

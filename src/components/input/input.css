@@ -1,16 +1,21 @@
 .input-container {
   display: flex;
   flex-direction: row;
-  /* flex: 1; */
   align-items: center;
   padding: 0px 5px;
   margin-bottom: 10px;
-
   background-color: white;
-  width: 45vw;
+  flex-grow: 1;
   height: 2em;
-
   border-radius: 5px;
+}
+
+.input-content-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  height: 100%;
 }
 
 .input {
@@ -18,8 +23,38 @@
   margin-left: 4px;
   width: 100%;
   padding: none;
+  background-color: transparent;
+  font-size: 0.9em;
+  font: inherit;
+}
+
+.input-label {
+  font-size: 0.9em;
+  font-weight: bold;
 }
 
 .input:focus {
+  outline: none;
+}
+
+textarea.input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: none;
+  background-color: rgba(138, 138, 138, 0.2);
+  font-size: 0.9em;
+  font: inherit;
+  resize: none;
+  border-radius: 5px;
+}
+
+.textarea-label {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-left: 0.3em;
+}
+
+.textarea:focus {
   outline: none;
 }

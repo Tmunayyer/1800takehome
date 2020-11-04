@@ -1,8 +1,40 @@
 .popup {
+  display: flex;
+  flex-direction: column;
   background-color: white;
-  /* height: 100px; */
-  /* width: 100px; */
   z-index: 1;
   padding: 5px;
   border-radius: 5px;
+  min-width: 40vw;
+  min-height: 80vh;
+  padding: 0.5em 1em;
+}
+
+.popup-header {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  margin-top: 7px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.popup-body {
+  padding: 1em 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-start;
+}
+
+.popup-actions {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
+  min-height: 2.5em;
+  margin-left: 1em;
+  margin-right: 1em;
 }

@@ -5,6 +5,33 @@ import './popup.css'
 
 import { Modal } from '../modal/modal'
 
+export function PopupHeader(props) {
+  const { text } = props
+  return <div className={'popup-header'}>{text}</div>
+}
+
+PopupHeader.propTypes = {
+  text: PropTypes.string.isRequired,
+}
+
+export function PopupBody(props) {
+  const { children } = props
+  return <div className={'popup-body'}>{children}</div>
+}
+
+PopupBody.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+}
+
+export function PopupActions(props) {
+  const { children } = props
+  return <div className={'popup-actions'}>{children}</div>
+}
+
+PopupActions.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+}
+
 export function Popup(props) {
   const { show, onClickOutside, onClickInside, children } = props
   return (
