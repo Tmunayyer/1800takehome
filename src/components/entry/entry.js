@@ -7,7 +7,7 @@ export function Entry(props) {
   const { onClick } = props
 
   return (
-    <div className={'entry-card'} onClick={onClick}>
+    <div className={'entry-card'} onClick={() => (onClick ? onClick() : null)}>
       <div className={'card-content'}>
         <div className={'user'}>{userId}</div>
         <div className={'title'}>{title}</div>
@@ -24,7 +24,7 @@ Entry.propTypes = {
     userId: PropTypes.number,
     title: PropTypes.string,
     body: PropTypes.string,
-  }),
+  }).isRequired,
 
   // index in the array
   index: PropTypes.number.isRequired,
