@@ -6,7 +6,7 @@ const initialState = {
   entries: { data: [], status: 'loading' },
   search: '',
   searchResults: { data: [], status: 'searching' },
-  editEntry: null,
+  editEntry: { id: -1, userId: -1, title: '', body: '' },
 }
 
 const entrySlice = createSlice({
@@ -24,10 +24,22 @@ const entrySlice = createSlice({
       state.searchResults = { data: action.payload, status: 'serached' }
     },
     setEditEntry(state, action) {
+      if (action.payload === null) {
+        state.editEntry = { id: -1, userId: -1, title: '', body: '' }
+        return
+      }
+
       const [entry] = state.entries.data.filter(({ id }) => {
         return id === action.payload
       })
-      state.editEntry = entry
+      state.editEntry = { ...entry }
+    },
+    editEntryField(state, action) {
+      const { name, value } = action.payload
+      state.editEntry = {
+        ...state.editEntry,
+        [name]: value,
+      }
     },
   },
 })
@@ -37,6 +49,7 @@ export const {
   setSearch,
   setSearchResults,
   setEditEntry,
+  editEntryField,
 } = entrySlice.actions
 export default entrySlice.reducer
 

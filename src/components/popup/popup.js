@@ -29,5 +29,5 @@ Popup.propTypes = {
   onClickOutside: PropTypes.func.isRequired,
   onClickInside: PropTypes.func,
 
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element.isRequired),
 }

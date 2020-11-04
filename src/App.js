@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react'
-
 import { useSelector, useDispatch } from 'react-redux'
-import { entrySagaCreators, setSearch, setEditEntry } from './store/entry/entry'
-
 import { Screen, Entry, Input, Popup } from './components'
+
+import {
+  entrySagaCreators,
+  setSearch,
+  setEditEntry,
+  editEntryField,
+} from './store/entry/entry'
 
 function EntryList() {
   const entryStore = useSelector((state) => state.entryStore)
@@ -58,7 +62,15 @@ function EditEntryForm() {
   const dispatch = useDispatch()
 
   let show = false
-  if (entryStore.editEntry) show = true
+
+  let title = ''
+  let body = ''
+
+  if (entryStore.editEntry.id !== -1) {
+    show = true
+    title = entryStore.editEntry.title
+    body = entryStore.editEntry.body
+  }
 
   return (
     <Popup
@@ -67,7 +79,18 @@ function EditEntryForm() {
         dispatch(setEditEntry(null))
       }}
     >
-      <Input></Input>
+      <Input
+        value={title}
+        onChangeHandler={(e) => {
+          dispatch(editEntryField({ name: 'title', value: e.target.value }))
+        }}
+      />
+      <Input
+        value={body}
+        onChangeHandler={(e) => {
+          dispatch(editEntryField({ name: 'body', value: e.target.value }))
+        }}
+      />
     </Popup>
   )
 }

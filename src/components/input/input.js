@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { Icon } from '../index'
 
 export function Input(props) {
-  const { icon, placeholder, onChangeHandler } = props
+  const { icon, placeholder, onChangeHandler, value } = props
 
   return (
     <div className={'input-container'}>
@@ -13,6 +13,7 @@ export function Input(props) {
       <input
         className={'input'}
         type="text"
+        value={value}
         placeholder={placeholder}
         onChange={onChangeHandler}
       ></input>
