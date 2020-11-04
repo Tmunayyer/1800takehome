@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { put, take, debounce } from 'redux-saga/effects'
 import sagaFactory from '../saga/sagaFactory'
 
-const entryInitialState = {
+export const entryInitialState = {
   entries: { data: [], status: 'loading' },
   search: '',
   searchResults: { data: [], term: '' },
