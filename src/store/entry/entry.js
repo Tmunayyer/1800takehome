@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { put, take, debounce } from 'redux-saga/effects'
 import sagaFactory from '../saga/sagaFactory'
 
-export const entryInitialState = {
+const entryInitialState = {
   entries: { data: [], status: 'loading' },
   search: '',
   searchResults: { data: [], term: '' },
@@ -11,7 +11,7 @@ export const entryInitialState = {
 
 const entrySlice = createSlice({
   name: 'entryStore',
-  entryInitialState,
+  initialState: entryInitialState,
   reducers: {
     setEntries(state, action) {
       state.entries = { data: action.payload, status: 'loaded' }
