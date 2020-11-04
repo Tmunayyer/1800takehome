@@ -19,28 +19,29 @@ function EntryList() {
 
   const entries = useSelector((state) => state.entryStore.entries)
   const searchResults = useSelector((state) => state.entryStore.searchResults)
-  const search = useSelector((state) => state.entryStore.search)
   if (entries.status !== 'loaded') return null
 
   let data = entries.data
 
   const hasSearchResults = searchResults.data.length
-  const searchHasNoResults = searchResults.status === 'loaded' && search !== ''
+  const searchHasNoResults = searchResults.term !== ''
 
   if (hasSearchResults || searchHasNoResults) {
     data = searchResults.data
   }
 
-  return data.map((data, index, arr) => (
-    <Entry
-      key={data.id}
-      data={arr[index]}
-      index={index}
-      onClick={() => {
-        dispatch(setEditEntry(data.id))
-      }}
-    />
-  ))
+  return data.map((elem, index, arr) => {
+    return (
+      <Entry
+        key={elem.id}
+        data={elem}
+        index={index}
+        onClick={() => {
+          dispatch(setEditEntry(elem.id))
+        }}
+      />
+    )
+  })
 }
 
 function SearchBar() {

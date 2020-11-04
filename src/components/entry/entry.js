@@ -4,7 +4,7 @@ import './entry.css'
 
 export function Entry(props) {
   const { userId, title, body } = props.data
-  const { onClick, index } = props
+  const { onClick } = props
 
   return (
     <div className={'entry-card'} onClick={onClick}>

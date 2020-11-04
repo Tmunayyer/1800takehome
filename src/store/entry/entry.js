@@ -5,7 +5,7 @@ import sagaFactory from '../saga/sagaFactory'
 const initialState = {
   entries: { data: [], status: 'loading' },
   search: '',
-  searchResults: { data: [], status: 'loading' },
+  searchResults: { data: [], term: '' },
   editEntry: { id: -1, userId: -1, title: '', body: '' },
 }
 
@@ -18,10 +18,13 @@ const entrySlice = createSlice({
     },
     setSearch(state, action) {
       state.search = action.payload
-      state.searchResults = { ...state.searchResults, status: 'loading' }
     },
     setSearchResults(state, action) {
-      state.searchResults = { data: action.payload, status: 'loaded' }
+      const { results, term } = action.payload
+      state.searchResults = {
+        data: results,
+        term: term,
+      }
     },
     setEditEntry(state, action) {
       if (action.payload === null) {
@@ -78,13 +81,13 @@ export const [entrySagas, entrySagaCreators] = sagaFactory({
       const rawData = entryStore.entries.data
       const term = entryStore.search
 
-      if (term === '') return yield put(setSearchResults([]))
+      if (term === '') return yield put(setSearchResults({ results: [], term }))
 
       const searchResults = rawData.filter((entry) => {
         return entry.title.includes(term)
       })
 
-      yield put(setSearchResults(searchResults))
+      yield put(setSearchResults({ results: searchResults, term }))
     })
   },
 })
