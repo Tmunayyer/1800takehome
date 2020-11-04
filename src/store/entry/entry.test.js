@@ -1,153 +1,198 @@
-import entryStoreReducer, {
-  entryInitialState,
-  setEntries,
-  setSearch,
-  setSearchResults,
-  setEditEntry,
-  editEntryField,
-  saveEditEntry,
-} from '../entry/entry'
+// import { call, put, take } from 'redux-saga/effects'
+// import { expectSaga } from 'redux-saga-test-plan'
 
-test('entryStore: intial state', () => {
-  // Arrange
-  const nextState = entryInitialState
+// import entryStoreReducer, {
+//   entryInitialState,
+//   setEntries,
+//   setSearch,
+//   setSearchResults,
+//   setEditEntry,
+//   editEntryField,
+//   saveEditEntry,
+//   entrySagas,
+//   entrySagaCreators,
+// } from '../entry/entry'
 
-  // Act
-  const result = entryStoreReducer(entryInitialState, {})
+// test('entryStore: intial state', () => {
+//   // Arrange
+//   const nextState = entryInitialState
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const result = entryStoreReducer(entryInitialState, {})
 
-test('entryStore: setEntries', () => {
-  // Arrange
-  const fakeData = [
-    { id: 1, userId: 1, title: 'test-title', body: 'test-body' },
-  ]
-  const nextState = {
-    ...entryInitialState,
-    entries: { data: fakeData, status: 'loaded' },
-  }
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
 
-  // Act
-  const result = entryStoreReducer(entryInitialState, setEntries(fakeData))
+// test('entryStore: setEntries', () => {
+//   // Arrange
+//   const fakeData = [
+//     { id: 1, userId: 1, title: 'test-title', body: 'test-body' },
+//   ]
+//   const nextState = {
+//     ...entryInitialState,
+//     entries: { data: fakeData, status: 'loaded' },
+//   }
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const result = entryStoreReducer(entryInitialState, setEntries(fakeData))
 
-test('entryStore: setSearch', () => {
-  // Arrange
-  const fakeSearch = 'term'
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
 
-  const nextState = {
-    ...entryInitialState,
-    search: 'term',
-  }
+// test('entryStore: setSearch', () => {
+//   // Arrange
+//   const fakeSearch = 'term'
 
-  // Act
-  const result = entryStoreReducer(entryInitialState, setSearch(fakeSearch))
+//   const nextState = {
+//     ...entryInitialState,
+//     search: 'term',
+//   }
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const result = entryStoreReducer(entryInitialState, setSearch(fakeSearch))
 
-test('entryStore: setSearchResults', () => {
-  // Arrange
-  const fakeSearch = 'term'
-  const fakeData = [0]
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
 
-  const nextState = {
-    ...entryInitialState,
-    searchResults: { data: fakeData, term: fakeSearch },
-  }
+// test('entryStore: setSearchResults', () => {
+//   // Arrange
+//   const fakeSearch = 'term'
+//   const fakeData = [0]
 
-  // Act
-  const result = entryStoreReducer(
-    entryInitialState,
-    setSearchResults({ results: fakeData, term: fakeSearch }),
-  )
+//   const nextState = {
+//     ...entryInitialState,
+//     searchResults: { data: fakeData, term: fakeSearch },
+//   }
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const result = entryStoreReducer(
+//     entryInitialState,
+//     setSearchResults({ results: fakeData, term: fakeSearch }),
+//   )
 
-test('entryStore: setEditEntry', () => {
-  // Arrange
-  const fakeData = [
-    { id: 1, userId: 1, title: 'test-title', body: 'test-body' },
-  ]
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
 
-  const nextState = {
-    ...entryInitialState,
-    entries: { data: fakeData, status: 'loaded' },
-    editEntry: fakeData[0],
-  }
+// test('entryStore: setEditEntry', () => {
+//   // Arrange
+//   const fakeData = [
+//     { id: 1, userId: 1, title: 'test-title', body: 'test-body' },
+//   ]
 
-  // Act
-  const initialWithData = {
-    ...entryInitialState,
-    entries: { data: fakeData, status: 'loaded' },
-  }
-  const result = entryStoreReducer(initialWithData, setEditEntry(1))
+//   const nextState = {
+//     ...entryInitialState,
+//     entries: { data: fakeData, status: 'loaded' },
+//     editEntry: fakeData[0],
+//   }
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const initialWithData = {
+//     ...entryInitialState,
+//     entries: { data: fakeData, status: 'loaded' },
+//   }
+//   const result = entryStoreReducer(initialWithData, setEditEntry(1))
 
-test('entryStore: editEntryField', () => {
-  // Arrange
-  const fakeData = {
-    id: 1,
-    userId: 1,
-    title: 'test-title',
-    body: 'test-body',
-  }
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
 
-  const nextState = {
-    ...entryInitialState,
-    editEntry: { ...fakeData, title: 'test-title-altered' },
-  }
+// test('entryStore: editEntryField', () => {
+//   // Arrange
+//   const fakeData = {
+//     id: 1,
+//     userId: 1,
+//     title: 'test-title',
+//     body: 'test-body',
+//   }
 
-  // Act
-  const initialWithData = {
-    ...entryInitialState,
-    editEntry: fakeData,
-  }
-  const result = entryStoreReducer(
-    initialWithData,
-    editEntryField({ name: 'title', value: 'test-title-altered' }),
-  )
+//   const nextState = {
+//     ...entryInitialState,
+//     editEntry: { ...fakeData, title: 'test-title-altered' },
+//   }
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const initialWithData = {
+//     ...entryInitialState,
+//     editEntry: fakeData,
+//   }
+//   const result = entryStoreReducer(
+//     initialWithData,
+//     editEntryField({ name: 'title', value: 'test-title-altered' }),
+//   )
 
-test('entryStore: saveEditEntry', () => {
-  // Arrange
-  const fakeData = [
-    { id: 1, userId: 1, title: 'test-title', body: 'test-body' },
-  ]
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
 
-  const nextState = {
-    ...entryInitialState,
-    entries: {
-      data: [
-        { id: 1, userId: 1, title: 'test-title-altered', body: 'test-body' },
-      ],
-      status: 'loaded',
-    },
-    editEntry: { ...fakeData[0], title: 'test-title-altered' },
-  }
+// test('entryStore: saveEditEntry', () => {
+//   // Arrange
+//   const fakeData = [
+//     { id: 1, userId: 1, title: 'test-title', body: 'test-body' },
+//   ]
 
-  // Act
-  const initialWithData = {
-    ...entryInitialState,
-    entries: { data: fakeData, status: 'loaded' },
-    editEntry: { ...fakeData[0], title: 'test-title-altered' },
-  }
-  const result = entryStoreReducer(initialWithData, saveEditEntry())
+//   const nextState = {
+//     ...entryInitialState,
+//     entries: {
+//       data: [
+//         { id: 1, userId: 1, title: 'test-title-altered', body: 'test-body' },
+//       ],
+//       status: 'loaded',
+//     },
+//     editEntry: { ...fakeData[0], title: 'test-title-altered' },
+//   }
 
-  // Assert
-  expect(result).toEqual(nextState)
-})
+//   // Act
+//   const initialWithData = {
+//     ...entryInitialState,
+//     entries: { data: fakeData, status: 'loaded' },
+//     editEntry: { ...fakeData[0], title: 'test-title-altered' },
+//   }
+//   const result = entryStoreReducer(initialWithData, saveEditEntry())
+
+//   // Assert
+//   expect(result).toEqual(nextState)
+// })
+
+// test('entryStore: fetchEntries', () => {
+//   const [fetchEntries] = entrySagas
+
+//   const fakeResponse = [{ id: 1, userId: 1, title: 'title', body: 'body' }]
+
+//   const env = {
+//     api: {
+//       get: () => fakeResponse,
+//     },
+//   }
+
+//   expectSaga(fetchEntries, env)
+//     // what will happen
+//     .put(setEntries(fakeResponse))
+//     // to trigger saga
+//     .dispatch(entrySagaCreators.fetchEntries())
+//     // go
+//     .run()
+// })
+
+// // test('entryStore: searchEntries', () => {
+// //   const [, searchEntries] = entrySagas
+
+// //   const fakeResponse = [{ id: 1, userId: 1, title: 'title', body: 'body' }]
+
+// //   const env = {
+// //     api: {
+// //       get: () => fakeResponse,
+// //     },
+// //   }
+
+// //   expectSaga(fetchEntries, env)
+// //     // what will happen
+// //     .put(setEntries(fakeResponse))
+// //     // to trigger saga
+// //     .dispatch(entrySagaCreators.fetchEntries())
+// //     // go
+// //     .run()
+// // })
