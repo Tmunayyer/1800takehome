@@ -36,12 +36,11 @@ export function TextArea(props) {
   const { icon, label, placeholder, onChangeHandler, value } = props
 
   return (
-    <div className={'input-container'}>
+    <div className={'textarea-container'}>
       <div className={'input-content-container'}>
         {icon ? <Icon icon={icon} /> : null}
         {label ? <div className={'textarea-label'}>{label}</div> : null}
         <textarea
-          resizable={false}
           className={'input'}
           type="text"
           value={value}
