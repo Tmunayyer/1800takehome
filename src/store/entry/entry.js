@@ -5,7 +5,7 @@ import sagaFactory from '../saga/sagaFactory'
 const initialState = {
   entries: { data: [], status: 'loading' },
   search: '',
-  searchResults: { data: [], status: 'searching' },
+  searchResults: { data: [] },
   editEntry: { id: -1, userId: -1, title: '', body: '' },
 }
 
@@ -18,10 +18,9 @@ const entrySlice = createSlice({
     },
     setSearch(state, action) {
       state.search = action.payload
-      state.searchResults = { ...state.searchResults, status: 'searching' }
     },
     setSearchResults(state, action) {
-      state.searchResults = { data: action.payload, status: 'serached' }
+      state.searchResults = { data: action.payload }
     },
     setEditEntry(state, action) {
       if (action.payload === null) {

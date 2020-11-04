@@ -11,22 +11,19 @@ import {
 } from './store/entry/entry'
 
 function EntryList() {
-  const entryStore = useSelector((state) => state.entryStore)
   const dispatch = useDispatch()
-
   useEffect(() => {
     const action = entrySagaCreators.fetchEntries()
     dispatch(action)
   }, [dispatch])
 
-  if (entryStore.entries.status !== 'loaded') return null
+  const entries = useSelector((state) => state.entryStore.entries)
+  const searchResults = useSelector((state) => state.entryStore.searchResults)
+  if (entries.status !== 'loaded') return null
 
-  let data = entryStore.entries.data
-
-  const hasSearchResults = entryStore.searchResults.data.length
-
-  if (hasSearchResults) {
-    data = entryStore.searchResults.data
+  let data = entries.data
+  if (searchResults.data.length) {
+    data = searchResults.data
   }
 
   return data.map((data, index, arr) => (
@@ -42,13 +39,13 @@ function EntryList() {
 }
 
 function SearchBar() {
-  const entryStore = useSelector((state) => state.entryStore)
+  const search = useSelector((state) => state.entryStore.search)
   const dispatch = useDispatch()
 
   return (
     <Input
       icon={'search'}
-      value={entryStore.search}
+      value={search}
       onChangeHandler={(e) => {
         const term = e.target.value
         dispatch(entrySagaCreators.searchEntries(term))
@@ -59,7 +56,7 @@ function SearchBar() {
 }
 
 function EditEntryForm() {
-  const entryStore = useSelector((state) => state.entryStore)
+  const editEntry = useSelector((state) => state.entryStore.editEntry)
   const dispatch = useDispatch()
 
   let show = false
@@ -67,10 +64,10 @@ function EditEntryForm() {
   let title = ''
   let body = ''
 
-  if (entryStore.editEntry.id !== -1) {
+  if (editEntry.id !== -1) {
     show = true
-    title = entryStore.editEntry.title
-    body = entryStore.editEntry.body
+    title = editEntry.title
+    body = editEntry.body
   }
 
   return (
