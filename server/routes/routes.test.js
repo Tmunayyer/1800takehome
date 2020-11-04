@@ -11,13 +11,6 @@ MockDB.prototype.getEntries = function () {
   return [{ title: 'fake entry' }]
 }
 
-MockDB.prototype.getEntryByTitle = function (title) {
-  this.methodCalledStack.push('getEntryByTitle')
-
-  if (title === 'validTitle') return [{ title: 'validEntry' }]
-  return []
-}
-
 describe('route: /v1/all', () => {
   const dependencies = {
     db: new MockDB(),
@@ -32,43 +25,5 @@ describe('route: /v1/all', () => {
 
     // make sure this send some data back
     expect(data.length).toBeGreaterThan(0)
-  })
-})
-
-describe('route /v1/search', () => {
-  const dependencies = {
-    db: new MockDB(),
-  }
-  const url = '/v1/search'
-  const app = createServer(dependencies)
-
-  test(`GET: good/bad query`, async () => {
-    const mockApp = request(app)
-
-    let urlParameters = '?title=validTitle'
-    let response = await mockApp.get(url + urlParameters)
-    let data = response.body
-
-    // make sure this sends data corresponding to url parameters
-    expect(data.length).toBeGreaterThan(0)
-    expect(data[0].title).toBe('validEntry')
-
-    urlParameters = '?title=invalidTitle'
-    response = await mockApp.get(url + urlParameters)
-    data = response.body
-
-    // make sure we get empty array on invalid search
-    expect(Array.isArray(data)).toBe(true)
-    expect(data.length).toBe(0)
-  })
-
-  test(`GET: missing query`, async () => {
-    const mockApp = request(app)
-
-    let response = await mockApp.get(url)
-    let data = response.body
-
-    expect(response.status).toBe(400)
-    expect(data.info).toBeTruthy()
   })
 })
