@@ -41,6 +41,13 @@ const entrySlice = createSlice({
         [name]: value,
       }
     },
+    saveEditEntry(state, action) {
+      const lookupId = state.editEntry.id
+      const index = state.entries.data.findIndex((entry) => {
+        return entry.id === lookupId
+      })
+      state.entries.data[index] = state.editEntry
+    },
   },
 })
 
@@ -50,6 +57,7 @@ export const {
   setSearchResults,
   setEditEntry,
   editEntryField,
+  saveEditEntry,
 } = entrySlice.actions
 export default entrySlice.reducer
 

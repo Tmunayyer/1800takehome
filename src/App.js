@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Screen, Entry, Input, Popup } from './components'
+import { Screen, Entry, Input, Popup, Button } from './components'
 
 import {
   entrySagaCreators,
   setSearch,
   setEditEntry,
   editEntryField,
+  saveEditEntry,
 } from './store/entry/entry'
 
 function EntryList() {
@@ -28,10 +29,10 @@ function EntryList() {
     data = entryStore.searchResults.data
   }
 
-  return data.map((data, index) => (
+  return data.map((data, index, arr) => (
     <Entry
       key={data.id}
-      data={data}
+      data={arr[index]}
       index={index}
       onClick={() => {
         dispatch(setEditEntry(data.id))
@@ -90,6 +91,22 @@ function EditEntryForm() {
         onChangeHandler={(e) => {
           dispatch(editEntryField({ name: 'body', value: e.target.value }))
         }}
+      />
+
+      <Button
+        text={'save'}
+        onClick={() => {
+          dispatch(saveEditEntry())
+          dispatch(setEditEntry(null))
+        }}
+        disabled={false}
+        type={'greene'}
+      />
+      <Button
+        text={'cancel'}
+        onClick={() => dispatch(setEditEntry(null))}
+        disabled={false}
+        type={'red'}
       />
     </Popup>
   )
